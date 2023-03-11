@@ -1,0 +1,229 @@
+﻿body {
+    /* background:linear-gradient(to right, 
+#2ed573, #f9ca24) ; */
+    overflow-x: hidden;
+}
+
+.container {
+    background: #fff;
+    border-radius: 10px;
+    width: 90%;
+    height: 600px;
+   /* margin: 0 auto;*/
+    position: relative;
+   /* margin-top: 5%;
+    margin-bottom: 5%;*/
+    margin: 5% auto;
+    box-shadow: 2px 5px 20px rgba(119, 119, 119,.5);
+}
+
+.leftbox {
+    float: left;
+    top: -5%;
+    left: 5%;
+    position: absolute;
+    width: 18%;
+    height: 110%;
+    background: #2ed573;
+    box-shadow: 3px 3px 10px rgba(119, 119, 119,.5);
+    border: .1em solid #fff;
+}
+
+#vert-nav > a {
+    list-style: none;
+    padding: 35px;
+    color: #fff;
+    font-size: 1.2em;
+    display: block;
+    transition: all .3s ease-in-out;
+}
+
+
+    #vert-nav > a:hover {
+        color: #10ac84;
+        cursor: pointer;
+        transform: scale(1.2);
+    }
+
+    #vert-nav > a:first-child {
+        margin-top: 7px;
+    }
+
+    #vert-nav > a.active {
+        color: #258431;
+    }
+
+
+.rightbox {
+    margin-left: 27%;
+}
+
+.tabShow {
+    width: 100%
+}
+
+.he1 {
+    font-family: "Montserrat", sans-serif;
+    color: #7ed386;
+    margin-top: 40px;
+    margin-bottom: 35px;
+    display: inline-block;
+}
+
+.he2 {
+    color: #777;
+    font-family: "Roboto", sans-serif;
+    font-size: 8px;
+    letter-spacing: 1px;
+    margin-left: 2px;
+    margin-top: 10px;
+}
+
+.input, p {
+    border: 0;
+    border-bottom: 1px solid;
+    width: 80%;
+    font-size: .7em;
+    padding: 7px 0;
+    outline: none;
+}
+
+span {
+    font-size: .7em;
+}
+
+.btn {
+    padding: 7px 15px;
+    border: 0;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.tabShow {
+    display: none
+}
+
+
+
+
+.fundraisers {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    padding: 15px;
+    width: 100%;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 400px;
+}
+
+.fundraiser-card {
+    background: #7ed386;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 10px 9px 10px 10px;
+    /* inline-block margin wonkiness*/
+    padding: 20px;
+    width: calc(40% - 20px)
+}
+
+
+.card {
+    background: #fff;
+    border-radius: 8px;
+}
+
+    .card .image-box {
+        height: 200px;
+    }
+
+        .card .image-box img {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px 8px 0 0;
+        }
+
+    .card .profile-details {
+        display: flex;
+        align-items: center;
+        column-gap: 12px;
+        padding: 15px;
+    }
+
+.profile-details .name {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.profile-details .job {
+    font-size: 12px;
+    font-weight: 500;
+    color: #4d4d4d;
+}
+
+
+
+
+
+
+
+
+
+
+.sidebar {
+    min-width: 300px;
+    display: flex;
+    background: #e5e5e5;
+}
+
+.content {
+    flex-grow: 1;
+    display: flex;
+    background: #ffd800;
+}
+
+.header {
+    height: 100px;
+    display: flex;
+}
+
+.main-container {
+    display: flex;
+    min-height: calc(100vh - 100px);
+}
+
+.text, .header {
+    margin: auto;
+    font-family: 'Century Gothic';
+}
+
+.header {
+    font-size: 20px;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: stretch;
+    align-items: flex-start;
+}
+
+.flex-item:nth-child(1) {
+    order: 0;
+    flex: 1 1 auto;
+    align-self: auto;
+}
+
+.flex-item:nth-child(2) {
+    order: 0;
+    flex: 2 1 auto;
+    align-self: auto;
+}
+
+.button-1{
+    margin-left: 20%;
+}

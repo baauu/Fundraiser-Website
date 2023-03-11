@@ -1,0 +1,150 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+#header{
+
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #efefef;
+}
+
+.background-gradient{
+    height: 100%;
+    background-repeat: no-repeat;
+    /*    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+    /*background: yellowgreen;*/
+    background: rgb(4,195,19);
+    background: linear-gradient(90deg, rgba(4,195,19,1) 58%, rgba(237,255,0,1) 100%);
+}
+
+.main {
+    display: flex;
+    min-height: calc(100vh - 40vh);
+    flex-direction: column;
+}
+
+    .main > featured {
+        flex: 1;
+    }
+
+    .main > nav,
+    .main > aside {
+        flex: 0 0 20vw;
+        background: beige;
+    }
+
+    .main > nav {
+        order: -1;
+    }
+
+header, footer, featured, nav, aside {
+    padding: 1em;
+}
+
+header, footer {
+    /* background: yellowgreen;*/
+    background: rgb(4,195,19);
+    background: linear-gradient(90deg, rgba(4,195,19,1) 58%, rgba(237,255,0,1) 100%);
+    height: 20vh;
+}
+
+.homepage-info {
+    width: 100%;
+    padding: 40px 60px;
+    background: #efefef;
+    text-align: center;
+}
+
+.inside-main {
+    width: 85%;
+    margin: auto;
+}
+
+.fundraisers {
+    /*get rid of this in account style sheet  and alter it to 400px height */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    padding: 15px;
+    width: 100%;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 600px;
+    margin-top: 5%;
+}
+
+.fundraiser-card {
+    background: #7ed386;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 10px 9px 10px 10px;
+    /* inline-block margin wonkiness*/
+    padding: 20px;
+    width: calc(50% - 25px)
+}
+
+
+.button-1 {
+    background-color: rgb(4,195,19);
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px;
+    line-height: 20px;
+    list-style: none;
+    margin: 0;
+    outline: none;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-1:hover,
+.button-1:focus {
+    background-color: rgba(237,255,0,1);
+    /*background-color: #F082AC;*/
+}
+
+.back{
+    color: #1d8421;
+    margin: 15px 10px;
+    line-height: 20px;
+}
+.back:hover{
+    color: #7ed386;
+}
+
+.main-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+}
+
+.flex-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/*get right box in here as another main div and then add the padding to rightbox for account page*/
