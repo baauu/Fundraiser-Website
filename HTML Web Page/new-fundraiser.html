@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="css/StyleSheet1.css">
+    <link rel="stylesheet" type="text/css" href="css/newFundraiserStyleSheet.css">
+    <link rel="stylesheet" type="text/css" href="css/accountStyleSheet.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--https://www.w3schools.com/howto/howto_css_contact_form.asp   php tutorial -->
+
+    <title></title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <a class="navbar-brand" href="index.html">LOGO</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="browse.html">DONATE <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">ABOUT US</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="account.html">ACCOUNT</a>
+                    </li>
+                </ul>
+                <!--<form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>-->
+                <ul class="navbar-nav my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">LOG IN</a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <div class="container">
+            <div class="rightbox" style="margin-left: 0;">
+                <!--change later-->
+                <a class="back" href="account.html">&#x2039;BACK</a>
+                <br />
+                <h2 class="he1">Create New Fundraiser</h2>
+
+                <div class="fundraisers">
+                    <!--<form action="/action_page.php">-->
+                    <form>
+                        <label for="fname">Title</label>
+                        <input type="text" id="fname" name="firstname" placeholder="Captivating title..">
+
+                        <label for="lname">Goal</label>
+                        <input type="text" id="lname" name="lastname" placeholder="Goal amount..">
+
+                        <label for="country">Location</label>
+                        <select id="country" name="country">
+                            <option value="australia">Australia</option>
+                            <option value="canada">Canada</option>
+                            <option value="usa">USA</option>
+                        </select>
+
+                        <label for="subject">Description</label>
+                        <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>Footer</footer>
+
+</body>
+</html>
