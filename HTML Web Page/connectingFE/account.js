@@ -14,9 +14,7 @@ const firebaseConfig = {
   };
   
   // initialize firebase
-  
   firebase.initializeApp(firebaseConfig);
-  //const app = initializeApp(firebaseConfig);
   
   // reference your database
   var acctDB = firebase.database().ref("signup-form");

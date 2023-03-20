@@ -74,6 +74,8 @@
         </div><!-- /card-container -->
     </div><!-- /container -->
 
+    
+
     <script type="module">
 
         //THIS IS WHERE YOU PASTE THE CODE TO CONNECT TO YOUR OWN DATABASE
@@ -103,6 +105,7 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
+        //const analytics = getAnalytics(app);
    
 
         import {getDatabase, ref, get, set, child, update, remove}
@@ -124,7 +127,8 @@
                 Email: emailid.value,
                 Password: PWD.value
             })
-            //.then(()=>{ alert("Data added successfully"); })
+            .then(()=>{ 
+                alert("Data added successfully"); })
             .catch((error)=>{
                 alert(error);
             });
