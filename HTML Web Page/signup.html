@@ -59,8 +59,8 @@
             <p id="profile-name" class="profile-name-card"></p>
             <form id="signup-form" class="form-signin">
                 <span id="reauth-email" class="reauth-email"></span>
-                <!-- <input id="fname" type="text" class="form-control" placeholder="First Name" required>
-                <input id="lname" type="text" class="form-control" placeholder="Last Name" required> -->
+                <input id="fname" type="text" class="form-control" placeholder="First Name" required>
+                <input id="lname" type="text" class="form-control" placeholder="Last Name" required>
                 <input id="inputEmail" type="email" class="form-control" placeholder="Email address" required autofocus>
                 <input id="inputPassword" type="password" class="form-control" placeholder="Password" required>
 
@@ -110,25 +110,28 @@
 
         const db = getDatabase();
 
-        //var userFName = document.querySelector("#fname")
-        //var userLName = document.querySelector("#lname")
+        var userFName = document.querySelector("#fname")
+        var userLName = document.querySelector("#lname")
         var emailid = document.querySelector("#inputEmail");
         var PWD = document.querySelector("#inputPassword");
 
         var insertBtn = document.querySelector("#submitSignUp");
 
+
         function InsertData() {
-            set(ref(db, "Account/" + emailid.value),{
-                //FName: userFName.value,
-                //LName: userLName.value,
+            set(ref(db, "Users/" + emailid.value),{
+                FName: userFName.value,
+                LName: userLName.value,
                 Email: emailid.value,
                 Password: PWD.value
             })
-            //.then(()=>{ alert("Data added successfully"); })
+            .then(()=>{ 
+                alert("Data added successfully"); 
+            })
             .catch((error)=>{
                 alert(error);
-            });
-        }
+            })
+        };
 
         insertBtn.addEventListener('click', InsertData);
     
