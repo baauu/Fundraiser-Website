@@ -39,10 +39,10 @@
                         <a class="nav-link" href="account.html">ACCOUNT</a>
                     </li>
                 </ul>
-                <!--<form class="form-inline my-2 my-lg-0">
+                <!-- <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>-->
+                </form> -->
                 <ul class="navbar-nav my-2 my-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="login.html">LOG IN</a>
@@ -57,6 +57,8 @@
             <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
             <img id="profile-img" class="profile-img-card" src="dog.jpg" />
             <p id="profile-name" class="profile-name-card"></p>
+
+
             <form id="signup-form" class="form-signin">
                 <span id="reauth-email" class="reauth-email"></span>
                 <input id="fname" type="text" class="form-control" placeholder="First Name" required>
@@ -64,29 +66,26 @@
                 <input id="inputEmail" type="email" class="form-control" placeholder="Email address" required autofocus>
                 <input id="inputPassword" type="password" class="form-control" placeholder="Password" required>
 
-                <button id = "submitSignUp" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign up</button>
+                <button id = "bttnSignUp"  type="submit" class="btn btn-lg btn-primary btn-block btn-signin"> Sign up</button>
+                <!--  -->
             </form><!-- /form -->
 
-            <!-- <div class="d-flex links">
+            <!-- can be taken out -->
+            <div class="d-flex links">
                 Have an account? <a href="login.html"> Log In</a>
-            </div> -->
+            </div>
 
         </div><!-- /card-container -->
     </div><!-- /container -->
 
     <script type="module">
-
-        //THIS IS WHERE YOU PASTE THE CODE TO CONNECT TO YOUR OWN DATABASE
-        //Copy and paste the CDN bit of code from your app that you created on Firebase.
-        //The script tag above is already there, so careful not to have duplicate script tags.
-        //After you've copied and pasted, just delete the unnecessary script tags. 
-
         // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-analytics.js";
+        
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
-
+      
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
@@ -99,13 +98,12 @@
             appId: "1:261919550921:web:686845ffc25aaf78074c18",
             measurementId: "G-1J8HQKC1YN"
         };
-
+      
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
-   
 
-        import {getDatabase, ref, get, set, child, update, remove}
+        import {getDatabase, set, get, update, remove, ref, child}
         from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
         const db = getDatabase();
@@ -115,7 +113,9 @@
         var emailid = document.querySelector("#inputEmail");
         var PWD = document.querySelector("#inputPassword");
 
-        var insertBtn = document.querySelector("#submitSignUp");
+        var submitBtn = document.querySelector("#bttnSignUp");
+
+        // writing to db 
 
 
         function InsertData() {
@@ -133,10 +133,16 @@
             })
         };
 
-        insertBtn.addEventListener('click', InsertData);
+        submitBtn.addEventListener('click', InsertData);
+
+
+
+      </script>
+
+    <!-- <script src="/signup.html"></script>  -->
     
-    </script>
-    
+
+viv    
     <footer>Footer</footer>
 </body>
 </html>
