@@ -59,8 +59,9 @@
             <p id="profile-name" class="profile-name-card"></p>
             <form id="signup-form" class="form-signin">
                 <span id="reauth-email" class="reauth-email"></span>
-                <!-- <input id="fname" type="text" class="form-control" placeholder="First Name" required>
-                <input id="lname" type="text" class="form-control" placeholder="Last Name" required> -->
+                <input id="fname" type="text" class="form-control" placeholder="First Name" required>
+                <input id="lname" type="text" class="form-control" placeholder="Last Name" required>
+                <input id="username" type="text" class="form-control" placeholder="Username" required>
                 <input id="inputEmail" type="email" class="form-control" placeholder="Email address" required autofocus>
                 <input id="inputPassword" type="password" class="form-control" placeholder="Password" required>
 
@@ -74,14 +75,8 @@
         </div><!-- /card-container -->
     </div><!-- /container -->
 
-    
 
     <script type="module">
-
-        //THIS IS WHERE YOU PASTE THE CODE TO CONNECT TO YOUR OWN DATABASE
-        //Copy and paste the CDN bit of code from your app that you created on Firebase.
-        //The script tag above is already there, so careful not to have duplicate script tags.
-        //After you've copied and pasted, just delete the unnecessary script tags. 
 
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
@@ -113,22 +108,25 @@
 
         const db = getDatabase();
 
-        //var userFName = document.querySelector("#fname")
-        //var userLName = document.querySelector("#lname")
+        var userFName = document.querySelector("#fname");
+        var userLName = document.querySelector("#lname");
+        var username = document.querySelector("#username");
         var emailid = document.querySelector("#inputEmail");
         var PWD = document.querySelector("#inputPassword");
 
         var insertBtn = document.querySelector("#submitSignUp");
 
         function InsertData() {
-            set(ref(db, "Account/" + emailid.value),{
-                //FName: userFName.value,
-                //LName: userLName.value,
+            set(ref(db, "Users/" + username.value),{
+                FName: userFName.value,
+                LName: userLName.value,
+                ID: username.value,
                 Email: emailid.value,
                 Password: PWD.value
             })
             .then(()=>{ 
-                alert("Data added successfully"); })
+                alert("Something is incomplete. Try again."); 
+            })
             .catch((error)=>{
                 alert(error);
             });

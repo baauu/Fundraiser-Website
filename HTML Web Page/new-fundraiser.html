@@ -66,6 +66,9 @@
                         <label for="lname">Goal</label>
                         <input type="text" id="lname" name="lastname" placeholder="Goal amount..">
 
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Username" required>
+
                         <label for="country">Location</label>
                         <select id="country" name="country">
                             <option value="australia">Australia</option>
@@ -76,11 +79,67 @@
                         <label for="subject">Description</label>
                         <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
 
-                        <input type="submit" value="Submit">
+                        <!-- <input type="submit" value="Submit"> -->
+                        <button id="submitBtn" type="submit"> Submit </button>
                     </form>
                 </div>
             </div>
         </div>
+
+        <script type = "module">
+
+            //import functions
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";
+
+            //configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
+                authDomain: "capstone-fund-website.firebaseapp.com",
+                databaseURL: "https://capstone-fund-website-default-rtdb.firebaseio.com",
+                projectId: "capstone-fund-website",
+                storageBucket: "capstone-fund-website.appspot.com",
+                messagingSenderId: "261919550921",
+                appId: "1:261919550921:web:686845ffc25aaf78074c18",
+                measurementId: "G-1J8HQKC1YN"
+            };
+
+            //initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+
+            import {getDatabase, ref, get, set, child, update, remove}
+            from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+
+            const db = getDatabase();
+
+            //variables
+            var title = document.querySelector("#fname");
+            var goal = document.querySelector("#lname");
+            var about = document.querySelector("#subject");
+            var username = document.querySelector("#username");
+
+            var submitBtn = document.querySelector("#submitBtn");
+
+            function InsertData() {
+                set(ref(db, "Fundraisers/" + title.value),{
+                    Title: title.value,
+                    Goal: goal.value,
+                    About: about.value,
+                    Owner: username.value
+                })
+                .then(()=>{ 
+                    alert("Try again!"); 
+                })
+                .catch((error)=>{
+                    alert(error);
+                });
+            }
+
+            submitBtn.addEventListener('click', InsertData);
+
+        </script>
+        
     </div>
     <footer>Footer</footer>
 
