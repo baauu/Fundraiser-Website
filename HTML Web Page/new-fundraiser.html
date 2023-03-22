@@ -64,7 +64,7 @@
                         <input type="text" id="fname" name="firstname" placeholder="Captivating title..">
 
                         <label for="lname">Goal</label>
-                        <input type="text" id="lname" name="lastname" placeholder="Goal amount..">
+                        <input type="text" id="lname" name="lastname" placeholder="Goal amount.." required>
 
                         <label for="username">Username</label>
                         <input type="text" id="username" name="username" placeholder="Username" required>
@@ -122,11 +122,11 @@
             var submitBtn = document.querySelector("#submitBtn");
 
             function InsertData() {
-                set(ref(db, "Fundraisers/" + title.value),{
+                set(ref(db, "Users/" + username.value + db,"Fundraisers/"),{
                     Title: title.value,
                     Goal: goal.value,
-                    About: about.value,
-                    Owner: username.value
+                    About: about.value
+                    //Owner: username.value
                 })
                 .then(()=>{ 
                     alert("Try again!"); 
@@ -135,6 +135,21 @@
                     alert(error);
                 });
             }
+
+            // function InsertData() {
+            //     set(ref(db, "Fundraisers/" + title.value),{
+            //         Title: title.value,
+            //         Goal: goal.value,
+            //         About: about.value,
+            //         Owner: username.value
+            //     })
+            //     .then(()=>{ 
+            //         alert("Try again!"); 
+            //     })
+            //     .catch((error)=>{
+            //         alert(error);
+            //     });
+            // }
 
             submitBtn.addEventListener('click', InsertData);
 

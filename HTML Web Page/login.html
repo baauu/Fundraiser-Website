@@ -56,7 +56,10 @@
             <form class="form-signin">
                 
                 <span id="reauth-email" class="reauth-email"></span>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
+                <h3 id="findName" type="text"></h3>
+
+                <input type="text" id="username" class="form-control" placeholder="Username" required autofocus>
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                 <div id="remember" class="checkbox">
                     <label>
@@ -65,7 +68,7 @@
                         </a>
                     </label>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+                <button id="submit" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
             </form><!-- /form -->
 
             <div class="d-flex links">
@@ -74,7 +77,62 @@
         </div><!-- /card-container -->
     </div><!-- /container -->
 
-    
+    <!-- <script type="module">
+
+            //import functions
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";
+
+            //configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
+                authDomain: "capstone-fund-website.firebaseapp.com",
+                databaseURL: "https://capstone-fund-website-default-rtdb.firebaseio.com",
+                projectId: "capstone-fund-website",
+                storageBucket: "capstone-fund-website.appspot.com",
+                messagingSenderId: "261919550921",
+                appId: "1:261919550921:web:686845ffc25aaf78074c18",
+                measurementId: "G-1J8HQKC1YN"
+            };
+
+            //initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+
+            import {getDatabase, ref, get, set, child, update, remove}
+            from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+
+            const db = getDatabase();
+
+            //variables
+            var username = document.querySelector("#username");
+            var password = document.querySelector("#inputPassword");
+            var findName = document.querySelector("#findName");
+            var submitBtn = document.querySelector("#submit");
+
+            
+
+            function RecallData() {
+                const dbref = ref(db); 
+
+                get(child(dbref, "Users/" + username.value ))
+                .then((snapshot)=>{
+                    if(snapshot.exists()) {
+                        //console.log(username.value)
+                        findName.innerHTML = "Hello, " + snapshot.val().FName;
+                    } else {
+                        alert("No data found");
+                    }
+                })
+                .catch((error)=>{
+                    alert(error)
+                })
+            }
+
+            submitBtn.addEventListener('click', RecallData);
+
+
+    </script> -->
 
 
 
