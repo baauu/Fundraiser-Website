@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Upload Form</title>
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-database.js"></script>
+  <script>
+    // Initialize Firebase
+    var firebaseConfig = {
+        apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
+        authDomain: "capstone-fund-website.firebaseapp.com",
+        databaseURL: "https://capstone-fund-website-default-rtdb.firebaseio.com",
+        projectId: "capstone-fund-website",
+        storageBucket: "capstone-fund-website.appspot.com",
+        messagingSenderId: "261919550921",
+        appId: "1:261919550921:web:686845ffc25aaf78074c18",
+        measurementId: "G-1J8HQKC1YN"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // Get a reference to the storage service, which is used to create references in your storage bucket
+    var storage = firebase.storage();
+
+    // Get a reference to the database service
+    var database = firebase.database();
+
+    function handleFileSelect(evt) {
+      evt.preventDefault();
+      var file = evt.target.files[0];
+      var title = document.getElementById("title").value;
+      var description = document.getElementById("description").value;
+      var amount = document.getElementById("amount").value;
+      var storageRef = storage.ref('images/' + file.name);
+      var uploadTask = storageRef.put(file);
+      uploadTask.on('state_changed',
+        function(snapshot){
+          // Observe state change events such as progress, pause, and resume
+          // See https://firebase.google.com/docs/storage/web/upload-files#monitor_upload_progress
+        }, 
+        function(error) {
+          // Handle unsuccessful uploads
+        }, 
+        function() {
+          // Handle successful uploads on complete
+          uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            // Write the data to the database
+            var newDataRef = database.ref('data').push();
+            newDataRef.set({
+              title: title,
+              description: description,
+              amount: amount,
+              imageUrl: downloadURL
+            });
+          });
+        }
+      );
+    }
+  </script>
+</head>
+<body>
+  <h1>Image Upload Form</h1>
+  <form>
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title">
+    <br><br>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description"></textarea>
+    <br><br>
+    <label for="amount">Numbered Amount:</label>
+    <input type="number" id="amount" name="amount">
+    <br><br>
+    <label for="image">Image:</label>
+    <input type="file" accept="image/*" onchange="handleFileSelect(event)">
+    <br><br>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
