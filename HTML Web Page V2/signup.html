@@ -15,6 +15,48 @@
             crossorigin="anonymous"></script>
 
     <title></title>
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-database.js"></script> -->
+
+    
+    <script type="module">
+        // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+
+        // import { getAuth } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";
+    
+    const firebaseConfig = {
+        apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
+        authDomain: "capstone-fund-website.firebaseapp.com",
+        databaseURL: "https://capstone-fund-website-default-rtdb.firebaseio.com",
+        projectId: "capstone-fund-website",
+        storageBucket: "capstone-fund-website.appspot.com",
+        messagingSenderId: "261919550921",
+        appId: "1:261919550921:web:686845ffc25aaf78074c18",
+        measurementId: "G-1J8HQKC1YN"
+    };
+    firebase.initalize(firebaseConfig);
+
+    var database = firebase.database();
+
+    function handleSubmit(event) {
+        event.preventDefault(); 
+        var email = document.getElementById("inputEmail").value; 
+        var password = document.getElementById("inputPassword").value;
+
+        //writing to database: 
+        // database.ref("users2").push({
+        //     email: email,
+        //     password: password
+        // })
+        console.log(email.value);
+        console.log(password.value);
+
+        document.getElementById("inputEmail").value = "";
+        document.getElementById("inputPassword").value = "";
+    }
+    </script>
 </head>
 <body class="background-gradient">
 
@@ -26,7 +68,7 @@
             <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
             <img id="profile-img" class="profile-img-card" src="sample_img/avatar.png" />
             <p id="profile-name" class="profile-name-card"></p>
-            <form class="form-signin">
+            <form class="form-signin" onsubmit="handleSubmit(event)">
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
@@ -42,7 +84,7 @@
 
 
     <!--OLD SCRIPT-->
-    <script type="module">
+    <!-- <script type="module">
 
         //THIS IS WHERE YOU PASTE THE CODE TO CONNECT TO YOUR OWN DATABASE
         //Copy and paste the CDN bit of code from your app that you created on Firebase.
@@ -148,12 +190,12 @@
                 });
         }
 
-        insertBtn.addEventListener('click', InsertData);
-        updateBtn.addEventListener('click', UpdateData);
-        removeBtn.addEventListener('click', RemoveData);
-        findBtn.addEventListener('click', FindData);
+        // insertBtn.addEventListener('click', InsertData);
+        // updateBtn.addEventListener('click', UpdateData);
+        // removeBtn.addEventListener('click', RemoveData);
+        // findBtn.addEventListener('click', FindData);
 
-    </script>
+    </script> -->
 
 
 
@@ -161,5 +203,6 @@
     <script>
         includeHTML();
     </script>
+
 </body>
 </html>
