@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Details</title>
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-database.js"></script>
+  <script>
+    // Initialize Firebase
+    var firebaseConfig = {
+        apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
+        authDomain: "capstone-fund-website.firebaseapp.com",
+        databaseURL: "https://capstone-fund-website-default-rtdb.firebaseio.com",
+        projectId: "capstone-fund-website",
+        storageBucket: "capstone-fund-website.appspot.com",
+        messagingSenderId: "261919550921",
+        appId: "1:261919550921:web:686845ffc25aaf78074c18",
+        measurementId: "G-1J8HQKC1YN"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // Get a reference to the database service
+    var database = firebase.database();
+
+    function loadData() {
+      // Get the data from the database
+      var ref = database.ref('data');
+      ref.on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var childData = childSnapshot.val();
+
+          // Display the data on the page
+          var container = document.getElementById('image-container');
+          var img = document.createElement('img');
+
+          img.src = childData.imageUrl;
+          container.appendChild(img);
+
+          var title = document.createElement('h2');
+          title.textContent = childData.title;
+          container.appendChild(title);
+
+          var description = document.createElement('p');
+          description.textContent = childData.description;
+          container.appendChild(description);
+          
+          var amount = document.createElement('p');
+          amount.textContent = 'Numbered Amount: ' + childData.amount;
+          container.appendChild(amount);
+        });
+      });
+    }
+  </script>
+</head>
+<body onload="loadData()">
+  <h1>Image Details</h1>
+  <div id="image-container"></div>
+</body>
+</html>
