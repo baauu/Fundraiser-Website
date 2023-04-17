@@ -80,6 +80,7 @@
             const emailVal = email.value;
             const passVal = password.value;
             createUserWithEmailAndPassword(auth, emailVal, passVal)
+
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user);
@@ -92,23 +93,23 @@
             })
         }
 
-        // function InsertData() {
-        //     event.preventDefault(); 
+        function InsertData() {
+            //event.preventDefault(); 
 
-        //     let emailVal = email.value
-        //     let passVal = password.value
+            let emailVal = email.value
+            let passVal = password.value
 
-        //     set(ref(db, "People/" + emailVal), {
-        //         email: emailVal,
-        //         passVal: passVal,
-        //     })
-        //         .then(() => {
-        //             alert("Data added successfully");
-        //         })
-        //         .catch((error) => {
-        //             alert(error);
-        //         });
-        // }
+            set(ref(db, "People/" + emailVal), {
+                email: emailVal,
+                passVal: passVal,
+            })
+                .then(() => {
+                    alert("Data added successfully");
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        }
 
         //function that helped me trouble shoot
         function display() {
@@ -121,7 +122,7 @@
 
         
 
-        insertBtn.addEventListener('click', userSignUp);
+        insertBtn.addEventListener('click', InsertData);
         // updateBtn.addEventListener('click', UpdateData);
         // removeBtn.addEventListener('click', RemoveData);
         // findBtn.addEventListener('click', FindData);
