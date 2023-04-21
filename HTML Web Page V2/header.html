@@ -6,14 +6,22 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="account.html">MY ACCOUNT</a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="browse.html">FUNDRAISERS <span class="sr-only">(current)</span></a>
             </li>
+
+            
             <li class="nav-item">
                 <a class="nav-link" href="#">ABOUT US</a>
+            </li>
+
+            <li class="nav-item">
+                <a id="myaccount" class="nav-link" href="account.html" style="visibility: hidden;">MY ACCOUNT</a>
+            </li>
+
+            <li class="nav-item">
+                <a id="signout-nav" class="nav-link"  style="visibility: hidden;">SIGN OUT</a>
             </li>
 
         </ul>
@@ -28,4 +36,5 @@
         </ul>
 
     </div>
+    <script type="module" src="user.js"></script>
 </nav>

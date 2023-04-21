@@ -23,6 +23,8 @@
     var password = document.querySelector("#password");
 
     var submitBtn = document.querySelector("#submitBtn");
+    //var signoutBtn = document.getElementById("signOut").style.visibility = "visible";
+    // document.querySelector("#signOut");
 
 
     const userSignIn = async() => {
@@ -30,9 +32,18 @@
         const passVal = password.value;
         signInWithEmailAndPassword(auth, emailVal, passVal)
         .then((userCredential) => {
+            nav();
             const user = userCredential.user;
-            const password = userCredential.password;
+            const userID = auth.currentUser;
+            const uid = userID.uid;
+
+            // submitBtn.href = "account.html?" + uid;
+
+            console.info(uid);
+            addURL(uid);
+
             alert("You have signed in successfully!");
+
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -40,6 +51,25 @@
             console.log(errorCode + errorMessage)
             alert(errorMessage)
         })
+    }
+
+    function nav (){
+        document.getElementById("signout-nav").style.visibility = "visible";
+        document.getElementById("myaccount").style.visibility = "visible";
+
+    }
+
+
+    const userSignOut = async() => {
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            alert("signed out")
+          }).catch((error) => {
+            // An error happened.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode + errorMessage)
+          });
     }
 
     //function that helped me trouble shoot
@@ -65,4 +95,6 @@
 
 
     submitBtn.addEventListener('click', userSignIn);
+    //signoutBtn.addEventListener('click', userSignOut);
+    
     

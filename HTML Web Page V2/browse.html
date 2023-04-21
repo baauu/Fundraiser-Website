@@ -92,25 +92,34 @@
 
             var fundCard = document.createElement('div');
             fundCard.classList.add('fundraiser-card');
+
             var card = document.createElement('div');
             card.classList.add('card');
+
             var imgBox = document.createElement('div');
             imgBox.classList.add('image-box');
+
             var image = document.createElement('img');
             var details = document.createElement('div');
             details.classList.add('donate-details');
+
             var nameJob = document.createElement('div');
             nameJob.classList.add('name-job');
+
             var row = document.createElement('div');
             row.classList.add('second-row');
+
             var div = document.createElement('div');
             var name = document.createElement('h3');
             name.classList.add('name');
+
             var job = document.createElement('h4');
             job.classList.add('job');
+
             var button = document.createElement('a');
             button.classList.add('button-1');
             button.innerHTML = "DONATE";
+            
             button.href = "donate.html?" + key;
 
             name.innerHTML = title;
