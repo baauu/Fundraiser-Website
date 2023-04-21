@@ -15,6 +15,70 @@
             integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
             crossorigin="anonymous"></script>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+        import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+        import {
+            getAuth, createUserWithEmailAndPassword,
+            signInWithEmailAndPassword, onAuthStateChanged, signOut
+        } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
+            authDomain: "capstone-fund-website.firebaseapp.com",
+            databaseURL: "https://capstone-fund-website-default-rtdb.firebaseio.com",
+            projectId: "capstone-fund-website",
+            storageBucket: "capstone-fund-website.appspot.com",
+            messagingSenderId: "261919550921",
+            appId: "1:261919550921:web:686845ffc25aaf78074c18",
+            measurementId: "G-1J8HQKC1YN"
+        };
+
+        initializeApp(firebaseConfig)
+
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase();
+        var dbKey = location.search.substring(1);
+        //alert("Pages/" + dbKey);
+
+
+        function GetData() {
+            const dbref = ref(db);
+
+            get(child(dbref, ("Pages/" + dbKey)))
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        //findName.innerHTML = "Name: " + snapshot.val().Name;
+                        //findAge.innerHTML = "Age: " + snapshot.val().Age;
+                        var title = snapshot.val().Title;
+                        var descrip = snapshot.val().Descrip;
+                        //alert(title);
+                        AddData(title, descrip);
+                    } else {
+                        alert("No data found");
+                    }
+                })
+                .catch((error) => {
+                    alert(error)
+                })
+        }
+
+        function AddData(fundTitle, fundDescrip) {
+            var title = document.getElementById("title");
+            var description = document.getElementById("description");
+            title.innerHTML = fundTitle;
+            description.innerHTML = fundDescrip;
+
+        }
+
+        window.addEventListener("load", GetData);
+
+
+    </script>
+
     <title></title>
 </head>
 <body>
@@ -39,9 +103,9 @@
                     <a class="button-1" href="payment.html"> DONATE </a>
                 </div>
                 <div class="main-column">
-                    <div class="homepage-info">
-                        <h2 class="he1-gray">My Dog Needs Surgery</h2>
-                        <p>
+                    <div class="homepage-info" id="details">
+                        <h2 class="he1-gray" id="title">My Dog Needs Surgery</h2>
+                        <p id="description">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                             ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
