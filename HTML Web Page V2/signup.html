@@ -13,35 +13,12 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"
             integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
             crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
-    
-    <!-- <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script> -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+        import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword, 
+                signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
 
-    <title></title>
-</head>
-<body class="background-gradient">
-    <header>
-        <div w3-include-html="header.html"></div>
-    </header>
-    <div class="container">
-        <div class="card card-container">
-            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
-            <img id="profile-img" class="profile-img-card" src="sample_img/avatar.png" />
-            <p id="profile-name" class="profile-name-card"></p>
-            <form class="form-signin" onsubmit="userSignUp()">
-                <span id="reauth-email" class="reauth-email"></span>
-                <input type="email" id="email" class="form-control" placeholder="Email address" required autofocus>
-                <input type="password" id="password" class="form-control" placeholder="Password" required>
-
-                <input type="submit" value="Submit" />
-            </form><!-- /form -->
-
-        </div><!-- /card-container -->
-    </div><!-- /container -->
-    <footer></footer>
-    <script>
-        // import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
@@ -54,38 +31,51 @@
             measurementId: "G-1J8HQKC1YN"
         };
 
-        firebase.initializeApp(firebaseConfig)
+        initializeApp(firebaseConfig)
         
         
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase();
+
         var email = document.querySelector("#email");
         var password = document.querySelector("#password");
 
-       // var insertBtn = document.querySelector("#submitBtn");
+        var insertBtn = document.querySelector("#submitBtn");
 
-        
-        function userSignUp() {
+        // function userSignUp() {
+        //     // These will work now.
+        //     const emailVal = email.value;
+        //     const passVal = password.value;
 
-            const set = firebase.set;
-            const ref = firebase.ref();
-            const db = firebase.getDatabase;
-            
+        //     // Log users in here.
+        //     console.info(emailVal);
+        //     console.info(passVal);
 
-            const emailVal = email.value;
-            const passVal = password.value;
-            //event.preventDefault();
-            // These will work now.
+        //     set(ref(db, "Individuals/" + passVal ), {
+        //         email: emailVal,
+        //         passVal: passVal,
+        //     })
+        //     .then(() => {
+        //         alert("Data added successfully");
+        //     })
+        //     .catch((error) => {
+        //         alert(error);
+        //     });
+        // }
+        //add a pause
 
-            set(ref(db, 'Users/' + emailVal), {
-                username: emailVal,
-                password: passVal
-            });
-
-            console.log("submitted!")
-
-    }
-
-
-
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            // ...
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+        });
 
 
         //function that helped me trouble shoot
@@ -94,8 +84,37 @@
             
             console.log(emailVal)
         }
+
+        // Event listeners.
+        document.querySelector('#submit-btn').addEventListener('click', userSignIn)
     </script>
-    <!-- <scrip src="signup.js"></scrip> -->
+
+    <title></title>
+</head>
+<body class="background-gradient">
+    <header>
+        <div w3-include-html="header.html"></div>
+    </header>
+    <div class="container">
+        <div class="card card-container">
+            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+            <img id="profile-img" class="profile-img-card" src="sample_img/avatar.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+
+
+            <div class="form-signin">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="email" id="email" class="form-control" placeholder="Email address" required autofocus>
+                <input type="password" id="password" class="form-control" placeholder="Password" required>
+
+                <input id="submit-btn" type="button" class="btn btn-lg btn-primary btn-block btn-signin" />
+            </div><!-- /form -->
+
+
+
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+    <footer></footer>
 
         <script type="text/javascript" src="js/load-script.js"></script>
         <script>

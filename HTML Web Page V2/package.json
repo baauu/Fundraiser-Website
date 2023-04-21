@@ -1,0 +1,15 @@
+{
+  "name": "fundraiser-website",
+  "version": "1.0.0",
+  "description": "This project was was done in collaboration for our 451R Capstone class * Jessi  * Kyra * Audrey * Ricardo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^9.20.0"
+  }
+}

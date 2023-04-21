@@ -61,7 +61,8 @@
                         </div>
                         <label for="cvv">CVV</label>
                         <input type="text" id="cvv" name="cvv" placeholder="352">
-                        <a class="button-1" href="#"> SUBMIT </a>
+                        <input type="submit" value="Submit" class="btn btn-lg btn-primary btn-block btn-signin" />
+                        <!-- <a class="button-1" href="#"> SUBMIT </a> -->
 
                     </div>
 
@@ -72,6 +73,7 @@
     <footer></footer>
 
     <script type="module">
+        import { getFirestore, doc, setDoc } from "/firebase/firestore/lite";
         
 
     </script>
