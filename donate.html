@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/StyleSheet1.css" />
+    <link rel="stylesheet" type="text/css" href="css/accountStyleSheet.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+            crossorigin="anonymous"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+        import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+        import {
+            getAuth, createUserWithEmailAndPassword,
+            signInWithEmailAndPassword, onAuthStateChanged, signOut
+        } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
+            authDomain: "capstone-fund-website.firebaseapp.com",
+            databaseURL: "https://capstone-fund-website-default-rtdb.firebaseio.com",
+            projectId: "capstone-fund-website",
+            storageBucket: "capstone-fund-website.appspot.com",
+            messagingSenderId: "261919550921",
+            appId: "1:261919550921:web:686845ffc25aaf78074c18",
+            measurementId: "G-1J8HQKC1YN"
+        };
+
+        initializeApp(firebaseConfig)
+
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase();
+        var dbKey = location.search.substring(1);
+        //alert("Pages/" + dbKey);
+
+
+        function GetData() {
+            const dbref = ref(db);
+
+            get(child(dbref, ("Pages/" + dbKey)))
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        //findName.innerHTML = "Name: " + snapshot.val().Name;
+                        //findAge.innerHTML = "Age: " + snapshot.val().Age;
+                        var title = snapshot.val().Title;
+                        var descrip = snapshot.val().Descrip;
+                        //alert(title);
+                        AddData(title, descrip);
+                    } else {
+                        alert("No data found");
+                    }
+                })
+                .catch((error) => {
+                    alert(error)
+                })
+        }
+
+        function AddData(fundTitle, fundDescrip) {
+            var title = document.getElementById("title");
+            var description = document.getElementById("description");
+            title.innerHTML = fundTitle;
+            description.innerHTML = fundDescrip;
+
+        }
+
+        window.addEventListener("load", GetData);
+
+
+    </script>
+
+    <title></title>
+</head>
+<body>
+    <header>
+        <div w3-include-html="header.html"></div>
+
+    </header>
+    <div class="main">
+        <div class="container1">
+            <a class="back" href="browse.html">&#x2039;BACK</a>
+            <br />
+            <div class="flex-wrapper">
+                <!--change later-->
+                <div class="main-column">
+                    <div>
+                        <img class="large-img" src="sample_img/dog.jpg" alt="" />
+                    </div>
+                    <!--TEMPORARY-->
+                    <div style="background-color:#00ff21; width: 350px; height:50px; margin-top: 50px; margin-bottom: 50px;">
+                        Money Raised
+                    </div>
+                    <a class="button-1" href="payment.html"> DONATE </a>
+                </div>
+                <div class="main-column">
+                    <div class="homepage-info" id="details">
+                        <h2 class="he1-gray" id="title">My Dog Needs Surgery</h2>
+                        <p id="description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                            in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+
+    <script type="text/javascript" src="js/load-script.js"></script>
+    <script>
+        includeHTML();
+    </script>
+</body>
+</html>
