@@ -69,8 +69,10 @@
         function AddData(fundTitle, fundDescrip) {
             var title = document.getElementById("title");
             var description = document.getElementById("description");
+            var paymentBtn = document.getElementById("paymentButton");
             title.innerHTML = fundTitle;
             description.innerHTML = fundDescrip;
+            paymentBtn.href = "payment.html?" + dbKey;
 
         }
 
@@ -100,17 +102,17 @@
                     <div style="background-color:#00ff21; width: 350px; height:50px; margin-top: 50px; margin-bottom: 50px;">
                         Money Raised
                     </div>
-                    <a class="button-1" href="payment.html"> DONATE </a>
+                    <a class="button-1" id="paymentButton" href="payment.html"> DONATE </a>
                 </div>
                 <div class="main-column">
                     <div class="homepage-info" id="details">
-                        <h2 class="he1-gray" id="title">My Dog Needs Surgery</h2>
+                        <h2 class="he1-gray" id="title">Title</h2>
                         <p id="description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            <!--Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                             ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
                             in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.-->
                         </p>
                     </div>
                     
