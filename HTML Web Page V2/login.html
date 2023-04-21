@@ -18,7 +18,9 @@
     <header>
         <div w3-include-html="header.html"></div>
 
-        <script type="module">
+        <script type="module" src="user.js"></script>
+
+        <!-- <script type="module">
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
             import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
             import { getAuth, createUserWithEmailAndPassword, 
@@ -81,17 +83,11 @@
                     }
                 })
             }
-    
-            
-    
-            
+
     
             submitBtn.addEventListener('click', userSignIn);
-            // updateBtn.addEventListener('click', UpdateData);
-            // removeBtn.addEventListener('click', RemoveData);
-            // findBtn.addEventListener('click', FindData);
     
-        </script>
+        </script> -->
     </header>
     <div class="container">
         <div class="card card-container">
@@ -109,11 +105,12 @@
                         </a>
                     </label>
                 </div>
-                <button id="submitBtn" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+                <input id="submitBtn" class="btn btn-lg btn-primary btn-block btn-signin" type="submit" value="Sign In">
             </div><!-- /form -->
 
             <div class="d-flex links">
-                Don't have an account?  <a href="signup.html" class="forgot-password"> Sign Up</a>
+                Don't have an account? 
+                <a href="signup.html" class="forgot-password"> Sign Up</a>
             </div>
         </div><!-- /card-container -->
     </div><!-- /container -->

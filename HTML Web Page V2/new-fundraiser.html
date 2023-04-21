@@ -16,9 +16,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
-        import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
-        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js";
-   
+        import { getDatabase, ref, get, set, child, update, remove, push } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";   
 
         const firebaseConfig = {
             apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
@@ -36,13 +34,15 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase();
 
+        const postRef = ref(db, 'Collections');
+        const newPostRef = push(postRef);
+
         var title = document.querySelector("#title");
         var goal = document.querySelector("#goal");
         var desc = document.querySelector("#desc");
         var date = document.querySelector("#date");
         var category = document.querySelector("#category");
         
-
         function registerFund() {
             const titleVal = title.value;
             const goalVal = goal.value;
@@ -50,23 +50,32 @@
             const dateVal = date.value;
             const categoryVal = category.value;
 
-            // console.info(titleVal);
-            // console.info(goalVal);
-            // console.info(descVal);
-            // console.info(dateVal);
-            // console.info(categoryVal);
-
-            const docRef = addDoc(collection(db, "fundraiser"), {
-                name: "Tokyo",
-                country: "Japan"
+            set(newPostRef, {
+                title: titleVal,
+                goal: goalVal,
+                description: descVal,
+                date: dateVal,
+                category: categoryVal,
+                amountDonated: '',
+            })
+            .then(() => {
+                alert("New Fundraiser Created");
             });
+            // this works: 
+            // set(ref(db, "Pages/" + titleVal), {
+            //     title: titleVal,
+            //     goal: goalVal,
+            //     description: descVal,
+            //     date: dateVal,
+            //     categoryVal: categoryVal
+            // })
+            // .then(() => {
+            //     alert("New Fundraiser Created");
+            // });
 
-
-        }
-
+        };
 
         document.querySelector('#submit-btn').addEventListener('click', registerFund)
-
     </script>
 
 </head>
@@ -110,10 +119,10 @@
                         <label for="date">Date</label>
                         <input type="date" id="date" name="date">
 
-                        <label for="img">Upload Image</label>
-                        <input type="file" id="img" name="img" accept="image/*">
+                        <!-- <label for="img">Upload Image</label>
+                        <input type="file" id="img" name="img" accept="image/*"> -->
 
-                        <input class="button-1" id="submit-btn" type="button" >
+                        <input class="button-1" id="submit-btn" type="button" value="Submit" >
                     </div>
                 </div>
             </div>
