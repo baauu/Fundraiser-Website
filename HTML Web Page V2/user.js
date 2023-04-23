@@ -17,7 +17,7 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const db = getDatabase();
+    //const db = getDatabase();
 
     var email = document.querySelector("#email");
     var password = document.querySelector("#password");
@@ -40,7 +40,7 @@
             // submitBtn.href = "account.html?" + uid;
 
             console.info(uid);
-            addURL(uid);
+            //addURL(uid);
 
             alert("You have signed in successfully!");
 
