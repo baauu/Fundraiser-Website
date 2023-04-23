@@ -67,6 +67,7 @@
 
             try {
                await createUserWithEmailAndPassword(auth, emailSignUpVal, passSignUpVal);
+               alert("user signed up!")
             }
             catch(error) {
                 console.log(`There was an error: ${error}`)
@@ -97,8 +98,8 @@
 
             <div class="form-signin">
                 <span id="reauth-email" class="reauth-email"></span>
-                <input type="emailSignUp" id="email" class="form-control" placeholder="Email address" required autofocus>
-                <input type="passwordSignUp" id="password" class="form-control" placeholder="Password" required>
+                <input type="email" id="emailSignUp" class="form-control" placeholder="Email address" required autofocus>
+                <input type="password" id="passwordSignUp" class="form-control" placeholder="Password" required>
 
                 <input id="submit-btn" type="button" class="btn btn-lg btn-primary btn-block btn-signin" value="Submit"/>
             </div><!-- /form -->
