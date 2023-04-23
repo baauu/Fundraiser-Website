@@ -64,22 +64,13 @@
             .then(() => {
                 alert("New Fundraiser Created");
             });
-            // this works: 
-            // set(ref(db, "Pages/" + titleVal), {
-            //     title: titleVal,
-            //     goal: goalVal,
-            //     description: descVal,
-            //     date: dateVal,
-            //     categoryVal: categoryVal
-            // })
-            // .then(() => {
-            //     alert("New Fundraiser Created");
-            // });
 
         };
 
         document.querySelector('#submit-btn').addEventListener('click', registerFund)
     </script>
+
+        <script type="module" src="user.js"></script>
 
 </head>
 <body>
