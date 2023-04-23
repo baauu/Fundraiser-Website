@@ -42,6 +42,7 @@
         var desc = document.querySelector("#desc");
         var date = document.querySelector("#date");
         var category = document.querySelector("#category");
+
         
         function registerFund() {
             const titleVal = title.value;
@@ -49,6 +50,7 @@
             const descVal = desc.value;
             const dateVal = date.value;
             const categoryVal = category.value;
+            const userID = sessionStorage.getItem("userID");
 
             set(newPostRef, {
                 title: titleVal,
@@ -57,6 +59,7 @@
                 date: dateVal,
                 category: categoryVal,
                 amountDonated: '',
+                uid: userID,
             })
             .then(() => {
                 alert("New Fundraiser Created");

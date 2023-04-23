@@ -38,6 +38,8 @@
             const uid = userID.uid;
 
             // submitBtn.href = "account.html?" + uid;
+            sessionStorage.setItem("userID", uid);
+
 
             console.info(uid);
             //addURL(uid);
