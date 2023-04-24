@@ -16,7 +16,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
-        import { getDatabase, ref, get, set, child, update, remove, push } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";   
+        import { getDatabase, ref, get, set, child, update, remove, push } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
@@ -43,7 +43,7 @@
         var date = document.querySelector("#date");
         var category = document.querySelector("#category");
 
-        
+
         function registerFund() {
             const titleVal = title.value;
             const goalVal = goal.value;
@@ -61,10 +61,10 @@
                 amountDonated: '0',
                 uid: userID,
             })
-            .then(() => {
-                alert("New Fundraiser Created");
-            });
-            // this works: 
+                .then(() => {
+                    alert("New Fundraiser Created");
+                });
+            // this works:
             // set(ref(db, "Pages/" + titleVal), {
             //     title: titleVal,
             //     goal: goalVal,
@@ -80,6 +80,7 @@
 
         document.querySelector('#submit-btn').addEventListener('click', registerFund)
     </script>
+    <script type="module" src="user.js"></script>
 
 </head>
 <body>

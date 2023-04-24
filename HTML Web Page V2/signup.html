@@ -16,12 +16,14 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
         // import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
-        import { getAuth, 
-                createUserWithEmailAndPassword, 
-                signInWithEmailAndPassword, 
-                onAuthStateChanged, 
-                signOut, 
-                connectAuthEmulator } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+        import {
+            getAuth,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            onAuthStateChanged,
+            signOut,
+            connectAuthEmulator
+        } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
@@ -35,11 +37,11 @@
         };
 
         initializeApp(firebaseConfig);
-        
-        
+
+
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-       // const db = getDatabase();
+        // const db = getDatabase();
 
         var emailSignUp = document.querySelector("#emailSignUp");
         var passwordSignUp = document.querySelector("#passwordSignUp");
@@ -60,23 +62,27 @@
         //         passVal: passVal,
         //     })
         // }
-            
+
         const createAccount = async () => {
             const emailSignUpVal = emailSignUp.value;
             const passSignUpVal = passwordSignUp.value;
 
             try {
-               await createUserWithEmailAndPassword(auth, emailSignUpVal, passSignUpVal);
-               alert("user signed up!")
+                await createUserWithEmailAndPassword(auth, emailSignUpVal, passSignUpVal);
+                alert("user signed up!")
             }
-            catch(error) {
+            catch (error) {
                 console.log(`There was an error: ${error}`)
                 //showLoginError(error)
-            } 
+            }
+        }
+
+        function GetUserID() {
+
         }
 
 
-        
+
         //add a pause
 
         // Event listeners.
@@ -101,7 +107,7 @@
                 <input type="email" id="emailSignUp" class="form-control" placeholder="Email address" required autofocus>
                 <input type="password" id="passwordSignUp" class="form-control" placeholder="Password" required>
 
-                <input id="submit-btn" type="button" class="btn btn-lg btn-primary btn-block btn-signin" value="Submit"/>
+                <input id="submit-btn" type="button" class="btn btn-lg btn-primary btn-block btn-signin" value="Submit" />
             </div><!-- /form -->
 
 
@@ -109,11 +115,11 @@
         </div><!-- /card-container -->
     </div><!-- /container -->
     <footer></footer>
-        <script></script>
+    <script></script>
 
-        <script type="text/javascript" src="js/load-script.js"></script>
-        <script>
-            includeHTML();
-        </script>
-    </body>
+    <script type="text/javascript" src="js/load-script.js"></script>
+    <script>
+        includeHTML();
+    </script>
+</body>
 </html>
