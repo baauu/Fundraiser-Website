@@ -24,7 +24,7 @@
     margin-top: 10px;
 }
 
-input[type=text], input[type=date], input[type=file], select, textarea {
+input[type=text], input[type=date], input[type=file], input[type=number], select, textarea {
     width: 100%;
     margin-bottom: 20px;
     padding: 12px;
@@ -45,8 +45,7 @@ label {
     display: block;
 }
 
-#header{
-
+#header {
 }
 
 body {
@@ -55,7 +54,7 @@ body {
     background: #efefef;
 }
 
-.background-gradient{
+.background-gradient {
     height: 100%;
     background-repeat: no-repeat;
     /*    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
@@ -114,7 +113,6 @@ header {
     width: 85%;
     margin: auto;
     padding: 40px 60px;
-
 }
 
 .rounded-div {
@@ -129,8 +127,9 @@ header {
     overflow-x: hidden;
     overflow-y: auto;
     height: 600px;
-/*    margin-top: 5%;
-*/}
+    /*    margin-top: 5%;
+*/
+}
 
 .fundraiser-card {
     background: #7ed386;
@@ -171,19 +170,69 @@ header {
     touch-action: manipulation;
 }
 
-.button-1:hover,
-.button-1:focus {
-    background-color: rgba(237,255,0,1);
-    /*background-color: #F082AC;*/
+    .button-1:hover,
+    .button-1:focus {
+        background-color: rgba(237,255,0,1);
+        /*background-color: #F082AC;*/
+    }
+
+.button-2 {
+    background-color: rgb(4,195,19);
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px;
+    line-height: 20px;
+    list-style: none;
+    margin: 0;
+    outline: none;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
 }
 
-.back{
+    .button-2:hover,
+    .button-2:focus {
+        background-color: rgb(8, 165, 20);
+    }
+
+.back {
     color: #1d8421;
     margin: 15px 10px;
     line-height: 20px;
 }
-.back:hover{
-    color: #7ed386;
+
+    .back:hover {
+        color: #7ed386;
+    }
+
+.progressBar {
+    height: 40px;
+    width: 80%;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 10px;
+    margin: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.progressBarFill {
+    height: 40px;
+    width: 10%;
+    background-color: #7ed386;
+    border-radius: 10px;
 }
 
 .main-column {
