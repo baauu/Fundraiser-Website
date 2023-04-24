@@ -49,13 +49,15 @@
         function GetData() {
             const dbref = ref(db);
 
-            get(child(dbref, ("Pages/" + dbKey)))
+            get(child(dbref, ("Collections/" + dbKey)))
                 .then((snapshot) => {
                     if (snapshot.exists()) {
-                        var amount = Number(snapshot.val().Amount);
+                        var amount = Number(snapshot.val().amountDonated);
                         var donation = Number(document.getElementById("donation").value);
+                        
                         //alert(amount);
                         AddDonation(amount, donation);
+
                     } else {
                         alert("No data found");
                     }
@@ -65,12 +67,20 @@
                 })
         }
 
+
+        function FillProgressBar(collected, goal) {
+            var bar = document.getElementById("progressBarFill");
+            var widthPercent = ((Number(collected) / Number(goal)) * 100);
+            widthPercent = widthPercent.toString();
+            bar.style.width = widthPercent + "%";
+        }
+
         function AddDonation(amount, donation) {
             var total = amount + donation;
             var strTotal = total.toString();
             //alert(total);
-            update(ref(db, "Pages/" + dbKey), {
-                Amount: strTotal
+            update(ref(db, "Collections/" + dbKey), {
+                amountDonated: strTotal
             })
                 .then(() => {
                     alert("Thanks for your donation!");
@@ -105,10 +115,11 @@
                     <div>
                         <img class="large-img" src="sample_img/dog.jpg" alt="" />
                     </div>
-                    <!--TEMPORARY-->
-                    <div style="background-color:#00ff21; width: 350px; height:50px; margin-top: 50px; margin-bottom: 50px;">
-                        Money Raised
-                    </div>
+                    <!--<div class="progressBar">
+                        <div class="progressBarFill" id="progressBarFill">
+
+                        </div>
+                    </div>-->
                 </div>
                 <div class="main-column">
                     <div class="homepage-info">

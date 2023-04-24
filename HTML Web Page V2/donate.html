@@ -48,15 +48,18 @@
         function GetData() {
             const dbref = ref(db);
 
-            get(child(dbref, ("Pages/" + dbKey)))
+            get(child(dbref, ("Collections/" + dbKey)))
                 .then((snapshot) => {
                     if (snapshot.exists()) {
                         //findName.innerHTML = "Name: " + snapshot.val().Name;
                         //findAge.innerHTML = "Age: " + snapshot.val().Age;
-                        var title = snapshot.val().Title;
-                        var descrip = snapshot.val().Descrip;
+                        var title = snapshot.val().title;
+                        var descrip = snapshot.val().description;
+                        var amount = snapshot.val().amountDonated;
+                        var goal = snapshot.val().goal;
                         //alert(title);
-                        AddData(title, descrip);
+                        AddData(title, descrip, goal, amount);
+                        FillProgressBar(amount, goal);
                     } else {
                         alert("No data found");
                     }
@@ -66,13 +69,26 @@
                 })
         }
 
-        function AddData(fundTitle, fundDescrip) {
+        function AddData(fundTitle, fundDescrip, fundGoal, fundAmount) {
             var title = document.getElementById("title");
             var description = document.getElementById("description");
+            var donationAmount = document.getElementById("donationAmount");
             var paymentBtn = document.getElementById("paymentButton");
             title.innerHTML = fundTitle;
             description.innerHTML = fundDescrip;
+            donationAmount.innerHTML = "GOAL: $" + fundGoal + "<br>COLLECTED: $" + fundAmount;
             paymentBtn.href = "payment.html?" + dbKey;
+
+        }
+
+        function FillProgressBar(collected, goal) {
+            var bar = document.getElementById("progressBarFill");
+            var widthPercent = ((Number(collected) / Number(goal)) * 100);
+            if (widthPercent > 100) {
+                widthPercent = 100;
+            }
+            widthPercent = widthPercent.toString();
+            bar.style.width = widthPercent + "%";
 
         }
 
@@ -99,8 +115,13 @@
                         <img class="large-img" src="sample_img/dog.jpg" alt="" />
                     </div>
                     <!--TEMPORARY-->
-                    <div style="background-color:#00ff21; width: 350px; height:50px; margin-top: 50px; margin-bottom: 50px;">
+                    <!--<div style="background-color:#00ff21; width: 350px; height:50px; margin-top: 50px; margin-bottom: 50px;">
                         Money Raised
+                    </div>-->
+                    <div class="progressBar">
+                        <div class="progressBarFill" id="progressBarFill">
+
+                        </div>
                     </div>
                     <a class="button-1" id="paymentButton" href="payment.html"> DONATE </a>
                 </div>
@@ -113,6 +134,9 @@
                             ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
                             in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                             cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.-->
+                        </p>
+                        <p id="donationAmount">
+
                         </p>
                     </div>
                     
