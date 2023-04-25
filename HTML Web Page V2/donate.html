@@ -76,6 +76,9 @@
             var paymentBtn = document.getElementById("paymentButton");
             title.innerHTML = fundTitle;
             description.innerHTML = fundDescrip;
+            if (fundAmount.length == 0) {
+                fundAmount = 0;
+            }
             donationAmount.innerHTML = "GOAL: $" + fundGoal + "<br>COLLECTED: $" + fundAmount;
             paymentBtn.href = "payment.html?" + dbKey;
 
