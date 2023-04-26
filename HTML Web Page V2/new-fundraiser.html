@@ -62,7 +62,8 @@
                 uid: userID,
             })
                 .then(() => {
-                    alert("New Fundraiser Created");
+                    alert("New Fundraiser Created!");
+                    window.location.href = "account.html";
                 });
             // this works:
             // set(ref(db, "Pages/" + titleVal), {
