@@ -37,16 +37,16 @@
     list-style: none;
     padding: 35px;
     color: #fff;
-    font-size: 1.2em;
+    font-size: 1.1em;
     display: block;
     transition: all .3s ease-in-out;
 }
 
 
     #vert-nav > a:hover {
-        color: #10ac84;
+        color: #258431;
         cursor: pointer;
-        transform: scale(1.2);
+        transform: scale(1.1);
     }
 
     #vert-nav > a:first-child {
