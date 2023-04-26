@@ -11,6 +11,128 @@
     <link rel="stylesheet" href="css/swiper-bundle.min.css" />
     <link rel="stylesheet" href="css/style.css" />
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+        import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+        import {
+            getAuth, createUserWithEmailAndPassword,
+            signInWithEmailAndPassword, onAuthStateChanged, signOut
+        } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
+            authDomain: "capstone-fund-website.firebaseapp.com",
+            databaseURL: "https://capstone-fund-website-default-rtdb.firebaseio.com",
+            projectId: "capstone-fund-website",
+            storageBucket: "capstone-fund-website.appspot.com",
+            messagingSenderId: "261919550921",
+            appId: "1:261919550921:web:686845ffc25aaf78074c18",
+            measurementId: "G-1J8HQKC1YN"
+        };
+
+        initializeApp(firebaseConfig)
+
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase();
+
+
+
+
+        function GetAllData() {
+            const dbref = ref(db);
+            var featured = ["-NTjc9Z3sHPG1AF04bSM", "-NTja7a8P8SdvjQ1J8P5", "-NTjpbW2Z62feo9CO1nh", "-NT_4Zgb0VrZbUR7pOrx",
+            "-NTjP7PvD5j_71vcC-t7"];
+
+            get(child(dbref, "Collections"))
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+
+                        var fundraisers = [];
+                        snapshot.forEach(childSnapshot => {
+                            if (featured.includes(childSnapshot.key)) {
+                                fundraisers.push([childSnapshot.key, childSnapshot.val()]);
+                            }
+                        })
+                        fundraisers.forEach(element => {
+                            addValues(element[0], element[1].goal, element[1].description,
+                                element[1].amountDonated, element[1].title)
+                        });
+
+                    } else {
+                        alert("No data found");
+                    }
+                })
+                .catch((error) => {
+                    alert(error)
+                })
+        }
+
+
+        function addValues(key, goal, descrip, donated, title) {
+
+            var container = document.getElementById('featuredFunds');
+
+            //<div class="card swiper-slide">
+            //    <div class="image-box">
+            //        <img src="sample_img/dog.jpg" alt="" />
+            //    </div>
+            //    <div class="donate-details">
+            //                    <div class="name-job">
+            //            <div class="second-row">
+            //                <div>
+            //                    <h3 class="name">My Dog Needs Surgery</h3>
+            //                    <h4 class="job">$ Raised Bar</h4>
+            //                </div>
+            //                <a class="button-1" href="donate.html"> DONATE </a>
+            //            </div>
+
+
+            //        </div>
+            //    </div>
+            //</div>
+
+
+            var card = document.createElement('div');
+            card.classList.add('card');
+            card.classList.add('swiper-slide');
+            var imgBox = document.createElement('div');
+            imgBox.classList.add('image-box');
+            var image = document.createElement('img');
+            var details = document.createElement('div');
+            details.classList.add('donate-details');
+            var nameJob = document.createElement('div');
+            nameJob.classList.add('name-job');
+            var row = document.createElement('div');
+            row.classList.add('second-row');
+            var div = document.createElement('div');
+            var name = document.createElement('h3');
+            name.classList.add('name');
+            var job = document.createElement('h4');
+            job.classList.add('job');
+            var button = document.createElement('a');
+            button.classList.add('button-1');
+            button.innerHTML = "DONATE";
+            button.href = "donate.html?" + key;
+
+            name.innerHTML = title;
+            job.innerHTML = goal;
+
+            div.appendChild(name); div.appendChild(job);
+            row.appendChild(div); row.appendChild(button);
+            nameJob.appendChild(row);
+            details.appendChild(nameJob);
+            imgBox.appendChild(image);
+            card.appendChild(imgBox); card.appendChild(details);
+            container.appendChild(card);
+
+        }
+
+        window.addEventListener("load", GetAllData);
+
+    </script>
 
     <title></title>
     <script type="module" src="user.js"></script>
@@ -26,12 +148,12 @@
         <div class="inside-main">
             <h1 class="he1-gray">Featured Fundraisers:</h1>
             <div class="container swiper">
-                <div class="slide-container">
-                    <div class="card-wrapper swiper-wrapper">
-                        <div class="card swiper-slide">
+                <div class="slide-container" >
+                    <div class="card-wrapper swiper-wrapper" id="featuredFunds">
+                        <!--<div class="card swiper-slide">
                             <div class="image-box">
-                                <img src="sample_img/hurricane.jpg" alt="" /> <!--src="images/showImg/pic1.webp"-->
-                            </div>
+                                <img src="sample_img/hurricane.jpg" alt="" />--> <!--src="images/showImg/pic1.webp"-->
+                            <!--</div>
                             <div class="donate-details">
                                 <div class="name-job">
                                     <h3 class="name">Hurricane Relief</h3>
@@ -43,7 +165,7 @@
                             <div class="image-box">
                                 <img src="sample_img/dog.jpg" alt="" />
                             </div>
-                            <div class="donate-details">
+                            <div class="donate-details">-->
                                 <!--<div class="main-row">
                                     <div class="name-job">
                                         <h3 class="name">My Dog Needs Surgery</h3>
@@ -51,7 +173,7 @@
                                     </div>
                                     <a class="button-1" href="donate.html"> DONATE </a>
                                 </div>-->
-                                <div class="name-job">
+                                <!--<div class="name-job">
                                     <div class="second-row">
                                         <div>
                                             <h3 class="name">My Dog Needs Surgery</h3>
@@ -96,7 +218,7 @@
                                     <h4 class="job">$ Raised Bar</h4>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="swiper-button-next swiper-navBtn"></div>
@@ -109,10 +231,13 @@
             <div class="homepage-info">
                 <h1 class="he1-gray">Donate to Great Causes Today!</h1>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.....
+                    Every act of kindness, no matter how small, has the power to change someone's 
+                    life. By donating to a cause, you have the opportunity to make a real difference 
+                    in the world. Whether it's supporting a local charity, helping those in need, 
+                    or contributing to a global movement, your generosity can inspire others and 
+                    create a ripple effect of positive change. Remember, even the smallest donation 
+                    can make a significant impact. So, let's come together and make the world a 
+                    better place, one act of kindness at a time.
                 </p>
             </div>
         </div>
