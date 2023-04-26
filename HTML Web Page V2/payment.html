@@ -45,6 +45,24 @@
         var dbKey = location.search.substring(1);
         //alert("Pages/" + dbKey);
 
+        function Validate() {
+            var a = document.getElementById("donation").value;
+            var b = document.getElementById("cname").value;
+            var c = document.getElementById("ccnum").value;
+            var d = document.getElementById("expmonth").value;
+            var e = document.getElementById("expyear").value;
+            var f = document.getElementById("cvv").value;
+
+            if ((a == null || a == "") || (b == null || b == "") || (c == null || c == "") || (d == null || d == "")
+                || (e == null || e == "") || (f == null || f == "")) {
+                alert("Please Fill In All Required Fields");
+                return false;
+            }
+            else {
+                GetData();
+            }
+        }
+
 
         function GetData() {
             const dbref = ref(db);
@@ -94,7 +112,7 @@
         }
 
         //window.addEventListener("load", GetData);
-        document.querySelector('#donate-btn').addEventListener('click', GetData);
+        document.querySelector('#donate-btn').addEventListener('click', Validate);
 
 
 

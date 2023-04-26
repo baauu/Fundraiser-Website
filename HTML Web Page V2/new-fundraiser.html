@@ -43,6 +43,20 @@
         var date = document.querySelector("#date");
         var category = document.querySelector("#category");
 
+        function Validate() {
+            var a = document.getElementById("title").value;
+            var b = document.getElementById("goal").value;
+            var c = document.getElementById("desc").value;
+            var d = document.getElementById("date").value;
+
+            if ((a == null || a == "") || (b == null || b == "") || (c == null || c == "") || (d == null || d == "")) {
+                alert("Please Fill In All Required Fields");
+                return false;
+            }
+            else {
+                registerFund();
+            }
+        }
 
         function registerFund() {
             const titleVal = title.value;
@@ -79,7 +93,7 @@
 
         };
 
-        document.querySelector('#submit-btn').addEventListener('click', registerFund)
+        document.querySelector('#submit-btn').addEventListener('click', Validate)
     </script>
     <script type="module" src="user.js"></script>
 
