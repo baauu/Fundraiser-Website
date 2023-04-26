@@ -63,6 +63,7 @@ const userSignIn = async () => {
             // submitBtn.href = "account.html?" + uid;
             sessionStorage.setItem("userID", uid);
             alert("You have signed in successfully!");
+            window.location.href = "index.html";
 
         })
         .catch((error) => {
@@ -89,8 +90,9 @@ const userSignOut = async () => {
     signOut(auth)
         .then(() => {
             // Sign-out successful.
-            alert("signed out")
+            alert("You have signed out successfully!");
             signOutNav();
+            window.location.href = "index.html";
 
         }).catch((error) => {
             // An error happened.
