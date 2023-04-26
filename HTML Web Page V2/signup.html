@@ -15,7 +15,7 @@
             crossorigin="anonymous"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
-        // import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+        import { getDatabase, ref, get, set, child, update, remove, push } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
         import {
             getAuth,
             createUserWithEmailAndPassword,
@@ -41,10 +41,16 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        // const db = getDatabase();
+        const db = getDatabase();
+
+        //const postRef = ref(db, 'Users');
+        //const newPostRef = push(postRef);
 
         var emailSignUp = document.querySelector("#emailSignUp");
         var passwordSignUp = document.querySelector("#passwordSignUp");
+        var usernameSignUp = document.querySelector("#usernameSignUp");
+        var uid = "";
+        
 
         var insertBtn = document.querySelector("#submitBtn");
 
@@ -66,15 +72,37 @@
         const createAccount = async () => {
             const emailSignUpVal = emailSignUp.value;
             const passSignUpVal = passwordSignUp.value;
+            const userSignUpVal = usernameSignUp.value;
 
             try {
-                await createUserWithEmailAndPassword(auth, emailSignUpVal, passSignUpVal);
-                alert("user signed up!")
+                await createUserWithEmailAndPassword(auth, emailSignUpVal, passSignUpVal)
+                    .then(function (data) {
+                        console.log('uid', data.user.uid);
+                        registerUser(userSignUpVal, data.user.uid);
+
+                    //Here if you want you can sign in the user
+                    }).catch(function (error) {
+                    //Handle error
+                });
+                alert("User signed up!");
+                window.location.href = "index.html";
+
             }
             catch (error) {
                 console.log(`There was an error: ${error}`)
                 //showLoginError(error)
             }
+        }
+
+
+        function registerUser(username, uid) {
+
+            set(ref(db, "Users/" + uid), {
+                username: username,
+            })
+                .then(() => {
+                    //nothing
+                });
         }
 
         function GetUserID() {
@@ -105,6 +133,7 @@
             <div class="form-signin">
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="email" id="emailSignUp" class="form-control" placeholder="Email address" required autofocus>
+                <input type="text" id="usernameSignUp" class="form-control" placeholder="Username" required>
                 <input type="password" id="passwordSignUp" class="form-control" placeholder="Password" required>
 
                 <input id="submit-btn" type="button" class="btn btn-lg btn-primary btn-block btn-signin" value="Submit" />
