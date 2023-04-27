@@ -24,6 +24,7 @@ var password = document.querySelector("#password");
 
 var signInBtn = document.querySelector("#signInBtn");
 var signoutBtn = document.querySelector("#signout-nav");
+var signoutBtn2 = document.querySelector("#accountSignOutBtn");
 
 var currentUser = "";
 
@@ -119,6 +120,10 @@ const userSignOut = async () => {
 
 if (signoutBtn) {
     signoutBtn.addEventListener('click', userSignOut);
+}
+
+if (signoutBtn2) {
+    signoutBtn2.addEventListener('click', userSignOut);
 }
 
 if (signInBtn) {
