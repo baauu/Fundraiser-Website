@@ -59,18 +59,20 @@
                 alert("User signed up!")
                 const userID = auth.currentUser;
                 const uid = userID.uid;
+                alert(uid);
                 
                 set(ref(db, "Individuals/" + uid), {
                     email: emailSignUpVal,
                     uid: uid,
                     username: usernameVal,
                 })
-                window.location.href = "login.html";
             }
             catch (error) {
                 console.log(`There was an error: ${error}`)
                 //showLoginError(error)
             }
+            //window.location.href = "login.html";
+
         }
 
         function GetUserID() {
