@@ -17,6 +17,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
         import { getDatabase, ref, get, set, child, update, remove, push } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+        //import { getStorage, ref, uploadBytes } from "firebase/storage";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
@@ -33,6 +34,8 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase();
+        //var storage = firebase.storage();
+
 
         const postRef = ref(db, 'Collections');
         const newPostRef = push(postRef);
@@ -93,6 +96,93 @@
 
         };
 
+
+        //function UploadPic(evt) {
+        //    evt.preventDefault();
+        //    var file = evt.target.files[0];
+        //    //var title = document.getElementById("title").value;
+        //    //var description = document.getElementById("description").value;
+        //    //var amount = document.getElementById("amount").value;
+        //    var storageRef = storage.ref('images/' + file.name);
+        //    var uploadTask = storageRef.put(file);
+        //    uploadTask.on('state_changed',
+        //        function (snapshot) {
+        //            // Observe state change events such as progress, pause, and resume
+        //            // See https://firebase.google.com/docs/storage/web/upload-files#monitor_upload_progress
+        //        },
+        //        function (error) {
+        //            // Handle unsuccessful uploads
+        //        },
+        //        function () {
+        //            // Handle successful uploads on complete
+        //            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+        //                // Write the data to the database
+        //                var newDataRef = database.ref('data').push();
+        //                newDataRef.set({
+        //                    //title: title,
+        //                    //description: description,
+        //                    //amount: amount,
+        //                    imageUrl: downloadURL
+        //                });
+        //            });
+        //        }
+        //    );
+        //}
+
+        //function UploadPicture(file) {
+            
+
+        //    const storage = getStorage();
+        //    const storageRef = ref(storage, 'images');
+
+        //    // 'file' comes from the Blob or File API
+        //    uploadBytes(storageRef, file).then((snapshot) => {
+        //        alert('Uploaded a blob or file!');
+        //    });
+
+
+
+
+        //    import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
+        //    const storage = getStorage();
+        //    const storageRef = ref(storage, 'images/rivers.jpg');
+
+        //    const uploadTask = uploadBytesResumable(storageRef, file);
+
+        //    // Register three observers:
+        //    // 1. 'state_changed' observer, called any time the state changes
+        //    // 2. Error observer, called on failure
+        //    // 3. Completion observer, called on successful completion
+        //    uploadTask.on('state_changed',
+        //        (snapshot) => {
+        //            // Observe state change events such as progress, pause, and resume
+        //            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        //            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        //            console.log('Upload is ' + progress + '% done');
+        //            switch (snapshot.state) {
+        //                case 'paused':
+        //                    console.log('Upload is paused');
+        //                    break;
+        //                case 'running':
+        //                    console.log('Upload is running');
+        //                    break;
+        //            }
+        //        },
+        //        (error) => {
+        //            // Handle unsuccessful uploads
+        //        },
+        //        () => {
+        //            // Handle successful uploads on complete
+        //            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        //            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        //                console.log('File available at', downloadURL);
+        //            });
+        //        }
+        //    );
+
+        //}
+
         document.querySelector('#submit-btn').addEventListener('click', Validate)
     </script>
     <script type="module" src="user.js"></script>
@@ -138,10 +228,10 @@
                         <label for="date">Date</label>
                         <input type="date" id="date" name="date">
 
-                        <!-- <label for="img">Upload Image</label>
-                        <input type="file" id="img" name="img" accept="image/*"> -->
+                        <!--<label for="img">Upload Image</label>
+                        <input type="file" id="img" name="img" accept="image/*">--> <!--onchange="UploadPic(event)"-->
 
-                        <input class="button-1" id="submit-btn" type="button" value="Submit" >
+                        <input class="button-1" id="submit-btn" type="button" value="Submit">
                     </div>
                 </div>
             </div>

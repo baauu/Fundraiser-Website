@@ -62,24 +62,29 @@
                         });
 
                     } else {
-                        alert("No data found");
+                        //alert("No data found");
                     }
                 })
                 .catch((error) => {
                     alert(error)
+                    console.log("get collections error");
+
                 })
 
             get(child(dbref, ("Individuals/" + userID)))
                 .then((snapshot) => {
                     if (snapshot.exists()) {
                         var username = snapshot.val().username;
+                        alert(username);
+                        alert(userID);
                         FillData(username);
                     } else {
-                        alert("No data found");
+                        alert("No data found", userID);
                     }
                 })
                 .catch((error) => {
-                    alert(error)
+                    alert(error, "hello")
+                    console.log("get individuals error");
                 })
         }
 
@@ -104,6 +109,8 @@
                 })
                 .catch((error) => {
                     alert(error);
+                    console.log("change error");
+
                 });
 
         }
