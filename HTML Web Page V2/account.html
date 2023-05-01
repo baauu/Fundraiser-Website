@@ -14,6 +14,164 @@
             integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
             crossorigin="anonymous"></script>
     <title></title>
+
+    <script type="module" src="user.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+        import { getDatabase, ref, get, set, child, update, remove, push } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
+            authDomain: "capstone-fund-website.firebaseapp.com",
+            databaseURL: "https://capstone-fund-website-default-rtdb.firebaseio.com",
+            projectId: "capstone-fund-website",
+            storageBucket: "capstone-fund-website.appspot.com",
+            messagingSenderId: "261919550921",
+            appId: "1:261919550921:web:686845ffc25aaf78074c18",
+            measurementId: "G-1J8HQKC1YN"
+        };
+
+        initializeApp(firebaseConfig)
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase();
+
+        function GetAllData() {
+            //const dbref = ref(db);
+
+            //const db = getDatabase();
+
+            const dbref = ref(db);
+            var userID = sessionStorage.getItem("userID");
+            //var container = document.getElementById('allFundraisers');
+
+            get(child(dbref, "Collections"))
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+
+                        var fundraisers = [];
+                        snapshot.forEach(childSnapshot => {
+                            if (childSnapshot.val().uid == userID) {
+                                fundraisers.push([childSnapshot.key, childSnapshot.val()]);
+                            }
+                        })
+                        fundraisers.forEach(element => {
+                            addValues(element[0], element[1].title, element[1].goal)
+                            //element[1].imageUrl
+                        });
+
+                    } else {
+                        //alert("No data found");
+                    }
+                })
+                .catch((error) => {
+                    alert(error)
+                    console.log("get collections error");
+
+                })
+
+            get(child(dbref, ("Individuals/" + userID)))
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        var username = snapshot.val().username;
+                        alert(username);
+                        alert(userID);
+                        FillData(username);
+                    } else {
+                        alert("No data found", userID);
+                    }
+                })
+                .catch((error) => {
+                    alert(error, "hello")
+                    console.log("get individuals error");
+                })
+        }
+
+        function FillData(oldUsername) {
+            var username = document.getElementById("username");
+
+            username.value = oldUsername;
+
+        }
+
+        function ChangeUsername() {
+            var newUsername = document.getElementById("username").value;
+            var userID = sessionStorage.getItem("userID");
+
+
+            update(ref(db, "Individuals/" + userID), {
+                username: newUsername,
+            })
+                .then(() => {
+                    alert("Edits Saved!");
+                    window.location.href = "account.html";
+                })
+                .catch((error) => {
+                    alert(error);
+                    console.log("change error");
+
+                });
+
+        }
+
+
+        function addValues(key, title, goal) { //imageUrl
+
+            var container = document.getElementById('userFundraisers');
+
+            //<div class="name-job">
+            //    <div class="second-row">
+            //        <div>
+            //            <h3 class="name">Dog Needs Surgery</h3>
+            //            <h4 class="job">$ Raised Bar</h4>
+            //        </div>
+            //        <a class="button-1" href="donate.html"> DONATE </a>
+
+
+            var fundCard = document.createElement('div');
+            fundCard.classList.add('fundraiser-card');
+            var card = document.createElement('div');
+            card.classList.add('card');
+            var imgBox = document.createElement('div');
+            imgBox.classList.add('image-box');
+            var image = document.createElement('img');
+            var details = document.createElement('div');
+            details.classList.add('donate-details');
+            var nameJob = document.createElement('div');
+            nameJob.classList.add('name-job');
+            var row = document.createElement('div');
+            row.classList.add('second-row');
+            var div = document.createElement('div');
+            var name = document.createElement('h3');
+            name.classList.add('name');
+            var job = document.createElement('h4');
+            job.classList.add('job');
+            var button = document.createElement('a');
+            button.classList.add('button-1');
+            button.innerHTML = "EDIT";
+            button.href = "edit.html?" + key;
+
+            name.innerHTML = title;
+            job.innerHTML = goal;
+            //image.src = imagrUrl;
+
+            div.appendChild(name); div.appendChild(job);
+            row.appendChild(div); row.appendChild(button);
+            nameJob.appendChild(row);
+            details.appendChild(nameJob);
+            imgBox.appendChild(image);
+            card.appendChild(imgBox); card.appendChild(details);
+            fundCard.appendChild(card);
+            container.appendChild(fundCard);
+        }
+
+        window.addEventListener("load", GetAllData);
+        document.querySelector('#usernameChangeBtn').addEventListener('click', ChangeUsername)
+
+
+
+    </script>
 </head>
 <body>
     <header>
@@ -54,8 +212,8 @@
                     </div>
 
 
-                    <div class="fundraisers">
-                        <div class="fundraiser-card">
+                    <div class="fundraisers" id="userFundraisers">
+                        <!--<div class="fundraiser-card">
                             <div class="card">
                                 <div class="image-box">
                                     <img src="images/showImg/pic2.jpeg" alt="" />
@@ -106,17 +264,28 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="settings tabShow">
                     <h1 class="he1-green">Personal Settings</h1>
+                    <div class="second-row">
+                        <div>
+                            Change username:
+                            <input type="text" id="username" />
+                        </div>
+                        
+                        <a class="button-1" id="usernameChangeBtn">CHANGE</a>
+                    </div>
                 </div>
                 <div class="security tabShow">
                     <h1 class="he1-green">Privacy & Security</h1>
                 </div>
                 <div class="signout tabShow">
                     <h1 class="he1-green">Sign Out</h1>
+                    <br />
+                    <a class="button-1" id="accountSignOutBtn" style="float:left;">SIGN OUT</a>
+
                 </div>
                 <!--<div class="settings tabShow">
             <h1>?</h1>

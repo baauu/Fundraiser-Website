@@ -13,50 +13,18 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"
             integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
             crossorigin="anonymous"></script>
-
-    <title></title>
-</head>
-<body class="background-gradient">
-
-    <header>
-        <div w3-include-html="header.html"></div>
-    </header>
-    <div class="container">
-        <div class="card card-container">
-            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
-            <img id="profile-img" class="profile-img-card" src="sample_img/avatar.png" />
-            <p id="profile-name" class="profile-name-card"></p>
-            <form class="form-signin">
-                <span id="reauth-email" class="reauth-email"></span>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign up</button>
-            </form><!-- /form -->
-
-        </div><!-- /card-container -->
-    </div><!-- /container -->
-    <footer></footer>
-
-
-
-
-    <!--OLD SCRIPT-->
     <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+        import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+        import {
+            getAuth,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            onAuthStateChanged,
+            signOut,
+            connectAuthEmulator
+        } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
 
-        //THIS IS WHERE YOU PASTE THE CODE TO CONNECT TO YOUR OWN DATABASE
-        //Copy and paste the CDN bit of code from your app that you created on Firebase.
-        //The script tag above is already there, so careful not to have duplicate script tags.
-        //After you've copied and pasted, just delete the unnecessary script tags.
-
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
             apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
             authDomain: "capstone-fund-website.firebaseapp.com",
@@ -68,94 +36,85 @@
             measurementId: "G-1J8HQKC1YN"
         };
 
-        // Initialize Firebase
+        initializeApp(firebaseConfig);
+
+
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-
-
-        import { getDatabase, ref, get, set, child, update, remove }
-            from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
-
-
-
+        const auth = getAuth(app);
         const db = getDatabase();
 
-        var enterID = document.querySelector("#enterID");
-        var enterName = document.querySelector("#enterName");
-        var enterAge = document.querySelector("#enterAge");
-        var findID = document.querySelector("#findID");
-        var findName = document.querySelector("#findName");
-        var findAge = document.querySelector("#findAge");
+        var emailSignUp = document.querySelector("#emailSignUp");
+        var passwordSignUp = document.querySelector("#passwordSignUp");
+        var usernameSignUp = document.querySelector("#usernameSignUp");
 
+        var insertBtn = document.querySelector("#submitBtn");
 
-        var insertBtn = document.querySelector("#insert");
-        var updateBtn = document.querySelector("#update");
-        var removeBtn = document.querySelector("#remove");
-        var findBtn = document.querySelector("#find");
+        const createAccount = async () => {
+            const emailSignUpVal = emailSignUp.value;
+            const passSignUpVal = passwordSignUp.value;
+            const usernameVal = usernameSignUp.value;
 
-        function InsertData() {
-            set(ref(db, "People/" + enterID.value), {
-                Name: enterName.value,
-                ID: enterID.value,
-                Age: enterAge.value
-            })
-                .then(() => {
-                    alert("Data added successfully");
+            try {
+                await createUserWithEmailAndPassword(auth, emailSignUpVal, passSignUpVal);
+                alert("User signed up!")
+                const userID = auth.currentUser;
+                const uid = userID.uid;
+                alert(uid);
+                
+                set(ref(db, "Individuals/" + uid), {
+                    email: emailSignUpVal,
+                    uid: uid,
+                    username: usernameVal,
                 })
-                .catch((error) => {
-                    alert(error);
-                });
-        }
-
-        function FindData() {
-            const dbref = ref(db);
-
-            get(child(dbref, "People/" + findID.value))
-                .then((snapshot) => {
-                    if (snapshot.exists()) {
-                        findName.innerHTML = "Name: " + snapshot.val().Name;
-                        findAge.innerHTML = "Age: " + snapshot.val().Age;
-                    } else {
-                        alert("No data found");
-                    }
-                })
-                .catch((error) => {
-                    alert(error)
-                })
+            }
+            catch (error) {
+                console.log(`There was an error: ${error}`)
+                //showLoginError(error)
+            }
+            //window.location.href = "login.html";
 
         }
 
-        function UpdateData() {
-            update(ref(db, "People/" + enterID.value), {
-                Name: enterName.value,
-                Age: enterAge.value
-            })
-                .then(() => {
-                    alert("Data updated successfully");
-                })
-                .catch((error) => {
-                    alert(error);
-                });
+        function GetUserID() {
+
         }
 
-        function RemoveData() {
-            remove(ref(db, "People/" + enterID.value))
-                .then(() => {
-                    alert("Data deleted successfully");
-                })
-                .catch((error) => {
-                    alert(error);
-                });
-        }
 
-        insertBtn.addEventListener('click', InsertData);
-        updateBtn.addEventListener('click', UpdateData);
-        removeBtn.addEventListener('click', RemoveData);
-        findBtn.addEventListener('click', FindData);
 
+        //add a pause
+
+        // Event listeners.
+        document.querySelector('#submit-btn').addEventListener('click', createAccount)
     </script>
 
+    <title></title>
+</head>
+<body class="background-gradient">
+    <header>
+        <div w3-include-html="header.html"></div>
+    </header>
+    <div class="container">
+        <div class="card card-container">
+            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+            <img id="profile-img" class="profile-img-card" src="sample_img/avatar.png" />
+            <p id="profile-name" class="profile-name-card"></p>
 
+
+            <div class="form-signin">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="username" id="usernameSignUp" class="form-control" placeholder="username" required>
+                <input type="email" id="emailSignUp" class="form-control" placeholder="Email address" required autofocus>
+                <input type="password" id="passwordSignUp" class="form-control" placeholder="Password" required>
+
+                <input id="submit-btn" type="button" class="btn btn-lg btn-primary btn-block btn-signin" value="Submit" />
+            </div><!-- /form -->
+
+
+
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+    <footer></footer>
+    <script></script>
 
     <script type="text/javascript" src="js/load-script.js"></script>
     <script>

@@ -14,6 +14,136 @@
 
     <!--https://codepen.io/arefeh_htmi/pen/mdPYZKJ    good credit card thingie-->
 
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+        import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+        import {
+            getAuth, createUserWithEmailAndPassword,
+            signInWithEmailAndPassword, onAuthStateChanged, signOut
+        } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC83qnIugk6Gtne0-NvHJZuJo9v25c29hw",
+            authDomain: "capstone-fund-website.firebaseapp.com",
+            databaseURL: "https://capstone-fund-website-default-rtdb.firebaseio.com",
+            projectId: "capstone-fund-website",
+            storageBucket: "capstone-fund-website.appspot.com",
+            messagingSenderId: "261919550921",
+            appId: "1:261919550921:web:686845ffc25aaf78074c18",
+            measurementId: "G-1J8HQKC1YN"
+        };
+
+        initializeApp(firebaseConfig)
+
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase();
+
+
+
+
+        function GetAllData() {
+            //const dbref = ref(db);
+
+            //const db = getDatabase();
+
+            const dbref = ref(db);
+
+            //var container = document.getElementById('allFundraisers');
+
+            get(child(dbref, "Collections"))
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+
+                        var fundraisers = [];
+                        snapshot.forEach(childSnapshot => {
+                            fundraisers.push([childSnapshot.key, childSnapshot.val()]);
+                        })
+                        fundraisers.forEach(element => {
+                            addValues(element[0], element[1].goal, element[1].description,
+                                element[1].amountDonated, element[1].title)
+                        });
+
+                    } else {
+                        alert("No data found");
+                    }
+                })
+                .catch((error) => {
+                    alert(error)
+                })
+        }
+
+
+        function addValues(key, goal, descrip, donated, title) {
+
+            var container = document.getElementById('allFundraisers');
+
+            //<div class="name-job">
+            //    <div class="second-row">
+            //        <div>
+            //            <h3 class="name">Dog Needs Surgery</h3>
+            //            <h4 class="job">$ Raised Bar</h4>
+            //        </div>
+            //        <a class="button-1" href="donate.html"> DONATE </a>
+
+
+            var fundCard = document.createElement('div');
+            fundCard.classList.add('fundraiser-card');
+            var card = document.createElement('div');
+            card.classList.add('card');
+            var imgBox = document.createElement('div');
+            imgBox.classList.add('image-box');
+            var image = document.createElement('img');
+            var details = document.createElement('div');
+            details.classList.add('donate-details');
+            var nameJob = document.createElement('div');
+            nameJob.classList.add('name-job');
+            var row = document.createElement('div');
+            row.classList.add('second-row');
+            var div = document.createElement('div');
+            var name = document.createElement('h3');
+            name.classList.add('name');
+            var job = document.createElement('h4');
+            job.classList.add('job');
+            var button = document.createElement('a');
+            button.classList.add('button-1');
+            button.innerHTML = "DONATE";
+            button.href = "donate.html?" + key;
+
+            name.innerHTML = title;
+            job.innerHTML = "Goal: $" + goal;
+
+            div.appendChild(name); div.appendChild(job);
+            row.appendChild(div); row.appendChild(button);
+            nameJob.appendChild(row);
+            details.appendChild(nameJob);
+            imgBox.appendChild(image);
+            card.appendChild(imgBox); card.appendChild(details);
+            fundCard.appendChild(card);
+            container.appendChild(fundCard);
+
+
+
+            //var container = document.getElementById('fundCard');
+            //var n = document.createElement('p');
+            //var i = document.createElement('p');
+            //var n = document.getElementById('fundTitle');
+            //var a = document.getElementById('fundAmount');
+            //n.innerHTML = title;
+            //a.innerHTML = amount;
+            //container.appendChild(n);
+            //container.appendChild(a);
+        }
+
+        window.addEventListener("load", GetAllData);
+
+    </script>
+
+    <script type="module" src="user.js"></script>
+
     <title></title>
 </head>
 <body>
@@ -64,25 +194,12 @@
 
             </div>
 
-            <div class="rounded-div">
-                <div class="fundraiser-card">
+            <div class="rounded-div" id="allFundraisers" style="padding-bottom: 90px;">
+                <!--<div class="fundraiser-card">
                     <div class="card">
                         <div class="image-box">
-                            <img src="images/showImg/pic2.jpeg" alt="" />
-                        </div>
-                        <div class="donate-details">
-                            <div class="name-job">
-                                <h3 class="name">Page Name</h3>
-                                <h4 class="job">$ Raised Bar</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="fundraiser-card">
-                    <div class="card">
-                        <div class="image-box">
-                            <img src="sample_img/dog.jpg" alt="" style="object-fit:cover;" /> <!---TEMPORARY STYLE-->
-                        </div>
+                            <img src="sample_img/dog.jpg" alt="" style="object-fit:cover;" />--> <!---TEMPORARY STYLE-->
+                        <!--</div>
                         <div class="donate-details">
                             <div class="name-job">
                                 <div class="second-row">
@@ -97,33 +214,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="fundraiser-card">
-                    <div class="card">
-                        <div class="image-box">
-                            <img src="images/showImg/pic2.jpeg" alt="" />
-                        </div>
-                        <div class="donate-details">
-                            <div class="name-job">
-                                <h3 class="name">Page Name</h3>
-                                <h4 class="job">$ Raised Bar</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="fundraiser-card">
-                    <div class="card">
-                        <div class="image-box">
-                            <img src="images/showImg/pic2.jpeg" alt="" />
-                        </div>
-                        <div class="donate-details">
-                            <div class="name-job">
-                                <h3 class="name">Page Name</h3>
-                                <h4 class="job">$ Raised Bar</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div>-->
             </div>
         </div>
 
@@ -134,5 +225,6 @@
     <script>
         includeHTML();
     </script>
+    <
 </body>
 </html>
